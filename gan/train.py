@@ -67,12 +67,15 @@ def train(D, G, D_solver, G_solver, discriminator_loss, generator_loss, show_eve
             ###################
             #####TODO########
             ###################
+            fake_data_batch = G.forward(noise)
             fake_data_batch = fake_data_batch.view(batch_size, input_channels, img_size, img_size)
 
             #Calculate the discriminator output for real and fake data
             ###################
             #####TODO########
             ###################
+            real_scores = D.forward(real_images)
+            fake_scores = D.forward(fake_data_batch)
 
             #compute discriminator loss
             d_error = discriminator_loss(real_scores, fake_scores)
@@ -96,17 +99,21 @@ def train(D, G, D_solver, G_solver, discriminator_loss, generator_loss, show_eve
             ###################
             #####TODO########
             ###################
+            # fake_scores = D.forward(fake_images)
+            fake_images = G.forward(noise)
             fake_images = fake_images.view(batch_size, input_channels, img_size, img_size)
 
             #Calculate the discriminator output for fake data
             ###################
             #####TODO########
             ###################
+            fake_scores = D.forward(fake_images)
 
             #compute generator loss
             ###################
             #####TODO########
             ###################
+            g_error = generator_loss(fake_scores)
 
             #Call backward() on the loss output
             g_error.backward()
