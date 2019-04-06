@@ -4,7 +4,7 @@ module load python3/3.4.1
 
 virtualenv ~/minstgan_env
 
-source ~/minstgan_env /bin/activate
+source ~/minstgan_env/bin/activate
 
 pip install torch
 pip install torchvision
