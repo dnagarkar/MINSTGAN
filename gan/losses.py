@@ -18,9 +18,6 @@ def discriminator_loss(logits_real, logits_fake):
     - loss: PyTorch Tensor containing (scalar) the loss for the discriminator.
     """
 
-    # real_shape = logits_real.size
-    # fake_shape = logits_fake.size
-
     ones_real = torch.ones_like(logits_real)
     zeros_fake = torch.zeros_like(logits_fake)
 
@@ -47,7 +44,6 @@ def generator_loss(logits_fake):
     - loss: PyTorch Tensor containing the (scalar) loss for the generator.
     """
 
-    # shape = logits_fake.size
     ones = torch.ones_like(logits_fake)
     loss = bce_loss(logits_fake, ones)
 
@@ -67,19 +63,9 @@ def ls_discriminator_loss(scores_real, scores_fake):
     - loss: A PyTorch Tensor containing the loss.
     """
 
-    # real_shape = scores_real.size
-    # fake_shape = scores_fake.size
-
     ones_real = torch.ones_like(scores_real)
     zeros_fake = torch.zeros_like(scores_fake)
 
-
-    # D_loss_real_ls = (scores_real - ones_real)**2
-    # D_loss_fake_ls = (scores_fake - zeros_fake)**2
-
-    # loss = D_loss_real_ls/2 + D_loss_fake_ls/2
-
-    # return loss
 
     D_loss_real = torch.mean(mse_loss(scores_real, ones_real))
     D_loss_fake = torch.mean(mse_loss(scores_fake, zeros_fake))
@@ -99,12 +85,8 @@ def ls_generator_loss(scores_fake):
     - loss: A PyTorch Tensor containing the loss.
     """
 
-    # shape = scores_fake.size
     ones = torch.ones_like(scores_fake)
-    # ls = (scores_fake - ones)**2
-    # loss = ls/2
 
-    # ones = torch.ones_like(logits_fake)
     loss = torch.mean(mse_loss(scores_fake, ones))
 
     return loss
