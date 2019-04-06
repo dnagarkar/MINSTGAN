@@ -6,6 +6,7 @@ virtualenv ~/minstgan_env
 
 source ~/minstgan_env/bin/activate
 
+pip install --upgrade pip
 pip install torch
 pip install torchvision
 pip install numpy
